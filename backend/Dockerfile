@@ -16,6 +16,7 @@ RUN CGO_ENABLED=0 GOOS=linux go build -ldflags="-w -s" -trimpath -o skillpulse .
 # Stage 2: Run — no Go toolchain, no build cache, only the compiled binary
 FROM alpine:3.23
 
+# hadolint ignore=DL3018
 RUN apk --no-cache add ca-certificates
 
 WORKDIR /app
