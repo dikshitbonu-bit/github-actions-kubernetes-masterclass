@@ -2,7 +2,7 @@
 # AFTER:  ~19 MB (alpine:3.23 + ca-certs + stripped binary ~9 MB, ~37% smaller)
 
 # Stage 1: Build
-FROM golang:1.26-alpine AS builder
+FROM golang:1.25-alpine AS builder
 
 WORKDIR /app
 
