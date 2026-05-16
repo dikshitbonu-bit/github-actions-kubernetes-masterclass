@@ -69,3 +69,6 @@ gateway:
 
 certmanager:
   enabled: false
+
+monitoring:
+  enabled: true
