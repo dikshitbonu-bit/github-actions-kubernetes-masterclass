@@ -1,0 +1,6 @@
+apiVersion: v2
+name: skillpulse
+description: SkillPulse — 3-tier skill tracking app (Go/Gin backend + Nginx frontend + MySQL 8.4)
+type: application
+version: 0.1.0
+appVersion: "1.0.0"
