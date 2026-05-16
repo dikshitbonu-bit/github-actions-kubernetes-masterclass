@@ -25,6 +25,9 @@ resource "helm_release" "argocd" {
         params = {
           "server.insecure" = true
         }
+        secret = {
+          webhookGithubSecret = "skillpulse-webhook-secret"
+        }
       }
     })
   ]

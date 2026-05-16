@@ -1,3 +1,5 @@
+namespace: skillpulse-stg
+
 replicaCount: 2
 
 resources:
@@ -10,3 +12,9 @@ resources:
 
 mysql:
   storage: 5Gi
+
+gateway:
+  enabled: false
+
+certmanager:
+  enabled: false

@@ -61,3 +61,11 @@ hpa:
   minReplicas: 1
   maxReplicas: 3
   targetCPUUtilizationPercentage: 70
+
+gateway:
+  enabled: false
+  # Set at deploy time via --set gateway.hostname=<NLB_IP>.nip.io
+  hostname: "REPLACE_WITH_NIP_IP.nip.io"
+
+certmanager:
+  enabled: false

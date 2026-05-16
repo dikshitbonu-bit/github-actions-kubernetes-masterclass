@@ -1,3 +1,5 @@
+namespace: skillpulse-prd
+
 replicaCount: 3
 
 resources:
@@ -16,3 +18,9 @@ hpa:
   minReplicas: 3
   maxReplicas: 8
   targetCPUUtilizationPercentage: 70
+
+gateway:
+  enabled: false
+
+certmanager:
+  enabled: false
