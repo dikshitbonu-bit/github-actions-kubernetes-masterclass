@@ -1,0 +1,74 @@
+# Base values — override per environment with values-dev/stg/prd.yaml
+
+namespace: skillpulse
+
+replicaCount: 1
+
+backend:
+  image:
+    repository: dikshitbonu-bit/skillpulse-backend
+    tag: latest
+    pullPolicy: IfNotPresent
+  port: 8080
+  service:
+    type: ClusterIP
+    port: 8080
+
+frontend:
+  image:
+    repository: dikshitbonu-bit/skillpulse-frontend
+    tag: latest
+    pullPolicy: IfNotPresent
+  port: 80
+  service:
+    type: LoadBalancer
+    port: 80
+
+mysql:
+  image:
+    repository: mysql
+    tag: "8.4"
+    pullPolicy: IfNotPresent
+  port: 3306
+  storage: 1Gi
+  # Override these at deploy time — do not commit real passwords
+  auth:
+    rootPassword: "rootpassword123"
+    database: skillpulse
+    username: skillpulse
+    password: "skillpulse123"
+  resources:
+    requests:
+      cpu: 100m
+      memory: 256Mi
+    limits:
+      memory: 512Mi
+  pvc:
+    # Disabled — StatefulSet manages PVCs via volumeClaimTemplates
+    enabled: false
+
+# Shared resources for backend and frontend containers
+resources:
+  requests:
+    cpu: 100m
+    memory: 128Mi
+  limits:
+    cpu: 500m
+    memory: 512Mi
+
+hpa:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 3
+  targetCPUUtilizationPercentage: 70
+
+gateway:
+  enabled: false
+  # Set at deploy time via --set gateway.hostname=<NLB_IP>.nip.io
+  hostname: "REPLACE_WITH_NIP_IP.nip.io"
+
+certmanager:
+  enabled: false
+
+monitoring:
+  enabled: true

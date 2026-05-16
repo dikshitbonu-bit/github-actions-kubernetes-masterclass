@@ -1,0 +1,26 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: skillpulse-prd
+  namespace: argocd
+  annotations:
+    argocd-image-updater.argoproj.io/update-strategy: latest
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/dikshitbonu-bit/github-actions-kubernetes-masterclass
+    targetRevision: feat/hackathon-improvements
+    path: helm/skillpulse
+    helm:
+      valueFiles:
+        - values.yaml
+        - values-prd.yaml
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: skillpulse-prd
+  syncPolicy:
+    automated:
+      selfHeal: true
+      prune: true
+    syncOptions:
+      - CreateNamespace=true

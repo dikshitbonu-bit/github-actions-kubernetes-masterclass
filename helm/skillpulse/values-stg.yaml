@@ -1,0 +1,20 @@
+namespace: skillpulse-stg
+
+replicaCount: 2
+
+resources:
+  requests:
+    cpu: 200m
+    memory: 256Mi
+  limits:
+    cpu: 1000m
+    memory: 1Gi
+
+mysql:
+  storage: 5Gi
+
+gateway:
+  enabled: false
+
+certmanager:
+  enabled: false

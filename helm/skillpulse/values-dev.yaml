@@ -1,0 +1,20 @@
+namespace: skillpulse-dev
+
+replicaCount: 1
+
+resources:
+  requests:
+    cpu: 100m
+    memory: 128Mi
+  limits:
+    cpu: 500m
+    memory: 512Mi
+
+mysql:
+  storage: 1Gi
+
+gateway:
+  enabled: false
+
+certmanager:
+  enabled: false

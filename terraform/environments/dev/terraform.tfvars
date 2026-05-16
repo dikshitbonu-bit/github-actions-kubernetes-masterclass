@@ -1,0 +1,9 @@
+aws_region         = "ap-south-1"
+cluster_name       = "skillpulse-eks"
+cluster_version    = "1.32"
+node_instance_type = "m7i-flex.large"
+node_desired_count = 2
+node_min_count     = 1
+node_max_count     = 3
+single_nat_gateway = true
+environment        = "dev"
