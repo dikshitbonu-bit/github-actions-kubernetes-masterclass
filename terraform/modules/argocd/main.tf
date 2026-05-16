@@ -1,5 +1,11 @@
-# ArgoCD — Installed via Helm into the EKS cluster
-# Exposed as LoadBalancer (AWS NLB) for easy access
+terraform {
+  required_providers {
+    helm = {
+      source  = "hashicorp/helm"
+      version = "~> 2.17"
+    }
+  }
+}
 
 resource "helm_release" "argocd" {
   name             = "argocd"
@@ -22,6 +28,4 @@ resource "helm_release" "argocd" {
       }
     })
   ]
-
-  depends_on = [module.eks]
 }

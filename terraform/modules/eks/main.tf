@@ -1,21 +1,24 @@
-# EKS Cluster — Module v21.x with Kubernetes 1.32
-# Uses EKS Pod Identity, access_entries, AL2023 AMI, and AWS provider v6.0+
+terraform {
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 6.0"
+    }
+  }
+}
 
 module "eks" {
   source  = "terraform-aws-modules/eks/aws"
   version = "~> 21.0"
 
-  # v21 parameter names (renamed from v20)
-  name               = local.name
+  name               = var.cluster_name
   kubernetes_version = var.cluster_version
 
   endpoint_public_access  = true
   endpoint_private_access = true
 
-  # Cluster creator gets admin access via access_entries
   enable_cluster_creator_admin_permissions = true
 
-  # EKS Add-ons (latest versions auto-resolved)
   addons = {
     coredns = {
       most_recent = true
@@ -40,12 +43,10 @@ module "eks" {
     }
   }
 
-  # Networking
-  vpc_id                   = module.vpc.vpc_id
-  subnet_ids               = module.vpc.private_subnets
-  control_plane_subnet_ids = module.vpc.intra_subnets
+  vpc_id                   = var.vpc_id
+  subnet_ids               = var.subnet_ids
+  control_plane_subnet_ids = var.control_plane_subnet_ids
 
-  # Managed Node Group
   eks_managed_node_groups = {
     skillpulse-ng = {
       instance_types = [var.node_instance_type]
@@ -59,15 +60,14 @@ module "eks" {
     }
   }
 
-  tags = local.tags
+  tags = var.tags
 }
 
-# IRSA for EBS CSI Driver (needed to create/attach EBS volumes)
 module "ebs_csi_irsa" {
   source  = "terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts-eks"
   version = "~> 5.0"
 
-  role_name             = "${local.name}-ebs-csi"
+  role_name             = "${var.cluster_name}-ebs-csi"
   attach_ebs_csi_policy = true
 
   oidc_providers = {
@@ -77,5 +77,5 @@ module "ebs_csi_irsa" {
     }
   }
 
-  tags = local.tags
+  tags = var.tags
 }
