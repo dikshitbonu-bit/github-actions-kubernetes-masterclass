@@ -1,0 +1,24 @@
+# Version control
+.git
+.gitignore
+
+# Test files
+*_test.go
+
+# Docs and markdown
+*.md
+docs/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Docker artifacts (not needed in build context)
+Dockerfile
+.dockerignore
+
+# Go build output
+*.out
+*.test

@@ -1,0 +1,16 @@
+# Version control
+.git
+.gitignore
+
+# Docs and markdown
+*.md
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Docker artifacts (not needed in build context)
+Dockerfile
+.dockerignore
