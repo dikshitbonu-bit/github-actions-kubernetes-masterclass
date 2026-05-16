@@ -6,7 +6,7 @@ replicaCount: 1
 
 backend:
   image:
-    repository: dikshitbonu-bit/skillpulse-backend
+    repository: dikshithbonu/skillpulse-backend
     tag: latest
     pullPolicy: IfNotPresent
   port: 8080
@@ -16,7 +16,7 @@ backend:
 
 frontend:
   image:
-    repository: dikshitbonu-bit/skillpulse-frontend
+    repository: dikshithbonu/skillpulse-frontend
     tag: latest
     pullPolicy: IfNotPresent
   port: 80
