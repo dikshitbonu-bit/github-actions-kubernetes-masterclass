@@ -27,7 +27,7 @@ frontend:
 mysql:
   image:
     repository: mysql
-    tag: d314c0b
+    tag: "8.4"
     pullPolicy: IfNotPresent
   port: 3306
   storage: 1Gi
@@ -46,6 +46,7 @@ mysql:
   pvc:
     # Disabled — StatefulSet manages PVCs via volumeClaimTemplates
     enabled: false
+    storageClass: "gp3"
 
 # Shared resources for backend and frontend containers
 resources:
