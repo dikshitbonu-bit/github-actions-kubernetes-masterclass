@@ -9,7 +9,7 @@ spec:
   project: default
   source:
     repoURL: https://github.com/dikshitbonu-bit/github-actions-kubernetes-masterclass
-    targetRevision: feat/hackathon-improvements
+    targetRevision: main
     path: helm/skillpulse
     helm:
       valueFiles:
