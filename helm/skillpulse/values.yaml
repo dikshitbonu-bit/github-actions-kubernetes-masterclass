@@ -7,7 +7,7 @@ replicaCount: 1
 backend:
   image:
     repository: dikshithbonu/skillpulse-backend
-    tag: 68501f4
+    tag: d314c0b
     pullPolicy: IfNotPresent
   port: 8080
   service:
@@ -17,7 +17,7 @@ backend:
 frontend:
   image:
     repository: dikshithbonu/skillpulse-frontend
-    tag: 68501f4
+    tag: d314c0b
     pullPolicy: IfNotPresent
   port: 80
   service:
@@ -27,7 +27,7 @@ frontend:
 mysql:
   image:
     repository: mysql
-    tag: 68501f4
+    tag: d314c0b
     pullPolicy: IfNotPresent
   port: 3306
   storage: 1Gi
