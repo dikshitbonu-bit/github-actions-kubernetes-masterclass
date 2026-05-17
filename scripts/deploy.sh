@@ -91,6 +91,20 @@ spec:
           port: 80
 EOF
 
+echo "==> Opening port 443 on NLB security group..."
+NLB_SG=$(aws ec2 describe-security-groups \
+  --filters "Name=tag:kubernetes.io/cluster/skillpulse-eks,Values=owned" \
+  --query "SecurityGroups[?contains(GroupName,'k8s-elb')].GroupId" \
+  --region ap-south-1 \
+  --output text | tr '\t' '\n' | grep -v "a88f6b\|a0fcc5" | head -1)
+
+aws ec2 authorize-security-group-ingress \
+  --group-id "${NLB_SG}" \
+  --protocol tcp \
+  --port 443 \
+  --cidr 0.0.0.0/0 \
+  --region ap-south-1 2>/dev/null || echo "Port 443 already open"
+
 echo "==> Applying cert-manager ClusterIssuer and Certificate..."
 kubectl apply -f - <<EOF
 apiVersion: cert-manager.io/v1
